@@ -3,7 +3,7 @@ const PostSchema = require('../models/post')
 const postController = {}
 
 postController.create = (req, res) => {
-    if(!req.body.author || !req.body.content || !req.body.theme, !req.body.tittle){
+    if(!req.body.author || !req.body.content || !req.body.theme || !req.body.title){
         return res.status(500).json({
             success: true, 
             message: "Some data is missing"
@@ -11,12 +11,13 @@ postController.create = (req, res) => {
     }
 
     const post = {
+        title: req.body.title,
         author: req.body.author, 
         content: req.body.content, 
         theme: req.body.theme, 
         isDeleted: false, 
         like: 0, 
-        unlyke: 0
+        unlyke: 0, 
     }
 
     PostSchema.create(post)
